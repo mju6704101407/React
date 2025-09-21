@@ -26,7 +26,7 @@ test('GET /health', async ({ request }) => {
 test('POST -> GET -> PUT -> PATCH -> DELETE flow', async ({ request }) => {
   // Create
   const createRes = await request.post(`${baseURL}/users`, {
-    data: { name: 'Morpheus', job: 'leader' },
+    data: { name: 'Matina Chowpa 6704101407', job: 'engineer' },
     headers: { 'Content-Type': 'application/json' }
   });
   expect(createRes.status()).toBe(201);
@@ -37,11 +37,11 @@ test('POST -> GET -> PUT -> PATCH -> DELETE flow', async ({ request }) => {
   // GET after POST
   const getAfterPost = await request.get(`${baseURL}/users/${id}`);
   expect(getAfterPost.status()).toBe(200);
-  expect((await getAfterPost.json()).data).toMatchObject({ id, name: 'Morpheus', job: 'leader' });
+  expect((await getAfterPost.json()).data).toMatchObject({ id, name: 'Matina Chowpa 6704101407', job: 'engineer' });
 
   // PUT
   const putRes = await request.put(`${baseURL}/users/${id}`, {
-    data: { name: 'Morpheus', job: 'zion resident' },
+    data: { name: 'Matina Chowpa 6704101407', job: 'architect' },
     headers: { 'Content-Type': 'application/json' }
   });
   expect(putRes.status()).toBe(200);
@@ -49,7 +49,7 @@ test('POST -> GET -> PUT -> PATCH -> DELETE flow', async ({ request }) => {
   // GET after PUT
   const getAfterPut = await request.get(`${baseURL}/users/${id}`);
   expect(getAfterPut.status()).toBe(200);
-  expect((await getAfterPut.json()).data).toMatchObject({ id, name: 'Morpheus', job: 'zion resident' });
+  expect((await getAfterPut.json()).data).toMatchObject({ id, name: 'Matina Chowpa 6704101407', job: 'architect' });
 
   // PATCH
   const patchRes = await request.patch(`${baseURL}/users/${id}`, {
@@ -71,4 +71,3 @@ test('POST -> GET -> PUT -> PATCH -> DELETE flow', async ({ request }) => {
   const getAfterDelete = await request.get(`${baseURL}/users/${id}`);
   expect(getAfterDelete.status()).toBe(404);
 });
-

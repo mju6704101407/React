@@ -25,7 +25,7 @@
       ]
     },
     {
-      "name": "Create User",
+      "name": "Create User (Matina Chowpa 6704101407)",
       "request": {
         "method": "POST",
         "header": [
@@ -33,7 +33,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"Morpheus\",\n  \"job\": \"leader\"\n}"
+          "raw": "{\n  \"name\": \"Matina Chowpa 6704101407\",\n  \"job\": \"engineer\"\n}"
         },
         "url": "{{baseUrl}}/users"
       },
@@ -63,11 +63,11 @@
       ]
     },
     {
-      "name": "Put User",
+      "name": "Put User (Matina Chowpa 6704101407)",
       "request": {
         "method": "PUT",
         "header": [ { "key": "Content-Type", "value": "application/json" } ],
-        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Morpheus\",\n  \"job\": \"zion resident\"\n}" },
+        "body": { "mode": "raw", "raw": "{\n  \"name\": \"Matina Chowpa 6704101407\",\n  \"job\": \"architect\"\n}" },
         "url": "{{baseUrl}}/users/{{userId}}"
       },
       "event": [
@@ -82,7 +82,7 @@
       "event": [
         { "listen": "test", "script": { "type": "text/javascript", "exec": [
           "pm.test('OK 200', function () { pm.response.to.have.status(200); });",
-          "pm.test('Job updated', function () { pm.expect(pm.response.json().data.job).to.eql('zion resident'); });"
+          "pm.test('Job updated', function () { pm.expect(pm.response.json().data.job).to.eql('architect'); });"
         ] } }
       ]
     },
@@ -125,4 +125,3 @@
     { "key": "baseUrl", "value": "http://localhost:3000" }
   ]
 }
-

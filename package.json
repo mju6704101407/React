@@ -7,7 +7,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "npx playwright test",
-    "test:local": "npx playwright test tests/local-api.spec.js"
+    "test:local": "npx playwright test tests/local-api.spec.js",
+    "test:external": "USE_EXTERNAL=1 npx playwright test tests/example-api.spec.js"
   },
   "keywords": [],
   "author": "",

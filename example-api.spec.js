@@ -45,7 +45,7 @@ const singleUser = {
 }
 
 test.describe('Basic test 1',()=>{     
-        test('basic test', async ({ request }) => {
+        test('basic test api v1', async ({ request }) => {
             const response = await request.get('https://reqres.in/api/users/2');  // ใช้ baseURL จาก config
             expect(response.ok()).toBeTruthy();
             const body = await response.json();
@@ -120,11 +120,11 @@ test.describe('GET',()=>{
 });
 
 test.describe('POST', () => {
-    test('Create new user', async ({ request }) => {
+    test('Create new user - Matina Chowpa 6704101407', async ({ request }) => {
         // Define test data
         const userData = {
-            name: "morpheus",
-            job: "leader"
+            name: "Matina Chowpa 6704101407",
+            job: "engineer"
         };
 
         // Make the POST request
@@ -154,11 +154,11 @@ test.describe('POST', () => {
 });
 
 test.describe('PUT', () => {
-    test('Update user with PUT', async ({ request }) => {
+    test('Update user with PUT - Matina Chowpa 6704101407', async ({ request }) => {
         // Define test data
         const userData = {
-            name: "morpheus",
-            job: "zion resident"
+            name: "Matina Chowpa 6704101407",
+            job: "architect"
         };
 
         // Make the PUT request to update user with ID 2

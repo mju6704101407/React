@@ -2,6 +2,7 @@ const { test, expect } = require('@playwright/test')
 const { userSchema } = require("../schema/user-schema");
 const { Ajv } = require("ajv");
 const ajv = new Ajv();
+const USE_EXTERNAL = process.env.USE_EXTERNAL === '1';
 
 const schema = {
     type:"object",
@@ -43,7 +44,8 @@ const singleUser = {
     }
 }
 test.describe('api test',()=>{
-test('basic test', async ({ request }) => {
+test('basic test ext-1', async ({ request }) => {
+    if (!USE_EXTERNAL) test.skip();
     const response = await request.get('https://reqres.in/api/users/2') // ใช้ baseURL จาก config
     console.log(response.url());
     console.log(response.status());
@@ -55,16 +57,50 @@ test('basic test', async ({ request }) => {
 })
 })
 test.describe('Basic test 1',()=>{     
-        test('basic test', async ({ request }) => {
+        test('basic test ext-2', async ({ request }) => {
+            if (!USE_EXTERNAL) test.skip();
             const response = await request.get('https://reqres.in/api/users/2');  // ใช้ baseURL จาก config
             expect(response.ok()).toBeTruthy();
             const body = await response.json();
             expect(body.data.id).toBe(2);
         });
 });
+test.describe('POST', () => {
+    test('Create new user - Matina Chowpa 6704101407', async ({ request }) => {
+        // Define test data
+        const userData = {
+            name: "Matina Chowpa 6704101407",
+            job: "engineer"
+        };
 
+        // Make the POST request
+        const response = await request.post('https://reqres.in/api/users', {
+            headers: {
+                'x-api-key': 'reqres-free-v1',
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            data: userData
+        });
+
+        // Log response for debugging
+        const responseBody = await response.json();
+        console.log('Response:', {
+            status: response.status(),
+            body: responseBody
+        });
+
+        // Assertions
+        expect(response.status()).toBe(201);
+        expect(responseBody).toHaveProperty('name', userData.name);
+        expect(responseBody).toHaveProperty('job', userData.job);
+        expect(responseBody).toHaveProperty('id');
+        expect(responseBody).toHaveProperty('createdAt');
+    });
+});
 test.describe('GET',()=>{
     test('Found single user',async({request})=>{
+        if (!USE_EXTERNAL) test.skip();
         const response = await request.get('https://reqres.in/api/users/2');
         // console.log(await  response.body());
         // console.log(await response.text());
@@ -128,46 +164,12 @@ test.describe('GET',()=>{
         expect(response.status()).toBe(404);
     });
 });
-test.describe('POST', () => {
-    test('Create new user', async ({ request }) => {
-        // Define test data
-        const userData = {
-            name: "Rattty",
-            job: "leader"
-        };
-
-        // Make the POST request
-        const response = await request.post('https://reqres.in/api/users', {
-            headers: {
-                'x-api-key': 'reqres-free-v1',
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            data: userData
-        });
-
-        // Log response for debugging
-        const responseBody = await response.json();
-        console.log('Response:', {
-            status: response.status(),
-            body: responseBody
-        });
-
-        // Assertions
-        expect(response.status()).toBe(201);
-        expect(responseBody).toHaveProperty('name', userData.name);
-        expect(responseBody).toHaveProperty('job', userData.job);
-        expect(responseBody).toHaveProperty('id');
-        expect(responseBody).toHaveProperty('createdAt');
-    });
-});
-
 test.describe('PUT', () => {
-    test('Update user with PUT', async ({ request }) => {
+    test('Update user with PUT - Matina Chowpa 6704101407', async ({ request }) => {
         // Define test data
         const userData = {
-            name: "morpheus",
-            job: "zion resident"
+            name: "Matina Chowpa 6704101407",
+            job: "architect"
         };
 
         // Make the PUT request to update user with ID 2
